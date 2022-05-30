@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Predicting app</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  <div class="container">
+    <div class="headers">
+	    <h1>Предсказание наличия сердечно-сосудистых заболеваний</h1>
+      <h3>Введите следующие значения, чтобы спрогнозировать наличие сердечно-сосудистых заболеваний</h3>
+      <div class="attention">Эта информация предоставляется исключительно при решении исследовательской задачи, не является рекомендацией или диагнозом. Если вы испытываете недомогания, лучше обратиться к врачу.</div>
+    </div>
+
+    <form class="form" action="{{ url_for('predict')}}" method="post">
+    	<input type="text" name="age" placeholder="Возраст" required="required" />
+      <select name="gender" aria-placeholder="Выберите пол" required="required">
+        <option value="">--Укажите пол--</option>
+        <option value="1">Женский</option>
+        <option value="2">Мужской</option>
+      </select>
+      <input type="text" name="height" placeholder="Рост (см)" required="required" />
+		  <input type="text" name="weight" placeholder="Вес (кг)" required="required" />
+
+      <input type="text" name="ap_hi" placeholder="Артериальное давление – Верхняя граница" required="required" />
+      <input type="text" name="ap_lo" placeholder="Артериальное давление – Нижняя граница" required="required" />
+      <select name="cholesterol" required="required">
+        <option value="">--Уровень содержания холестерина--</option>
+        <option value="1">Норма</option>
+        <option value="2">Выше нормы</option>
+        <option value="3">Значительно выше нормы</option>
+      </select>
+      <select name="gluc" required="required">
+        <option value="">--Уровень содержания глюкозы--</option>
+        <option value="1">Норма</option>
+        <option value="2">Выше нормы</option>
+        <option value="3">Значительно выше нормы</option>
+      </select>
+      <select name="smoke" required="required">
+        <option value="">--Курите?--</option>
+        <option value="0">Нет</option>
+        <option value="1">Да</option>
+      </select>
+      <select name="alco" required="required">
+        <option value="">--Употребляете алкоголь?--</option>
+        <option value="0">Нет</option>
+        <option value="1">Да</option>
+      </select>
+      <select name="active" required="required">
+        <option value="">--Занимаетесь спортом?--</option>
+        <option value="0">Нет</option>
+        <option value="1">Да</option>
+      </select>
+
+      <button type="submit" class="btn">Получить результат</button>
+    </form>
+
+    {{ prediction_text }}
+
+  </div>
+
+</body>
+</html>
